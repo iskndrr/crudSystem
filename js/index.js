@@ -3,7 +3,14 @@ var productDesc = document.getElementById("pDesc");
 var productCat = document.getElementById("pCat");
 var productPrice = document.getElementById("pPrice");
 
-var productList = [];
+var productList;
+if(localStorage.getItem("productList") == null){
+  productList = []
+
+}else{
+  productList = JSON.parse(localStorage.getItem("productList"));
+  displayProduct(productList)
+}
 
 console.log(productList);
 function getProducts() {
@@ -14,6 +21,7 @@ function getProducts() {
     pPrice: productPrice.value,
   };
   productList.push(product);
+  localStorage.setItem("productList", JSON.stringify(productList));
   console.log(productList);
   displayProduct(productList);
   clearList();
@@ -56,5 +64,6 @@ function clearList() {
 
 function deleteProduct(index) {
   productList.splice(index, 1);
-  displayProduct(productList)
+  localStorage.setItem("productList", JSON.stringify(productList));
+  displayProduct(productList);
 }
