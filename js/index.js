@@ -2,7 +2,6 @@ var productName = document.getElementById("pName");
 var productDesc = document.getElementById("pDesc");
 var productCat = document.getElementById("pCat");
 var productPrice = document.getElementById("pPrice");
-
 var productList;
 if(localStorage.getItem("productList") == null){
   productList = []
@@ -66,4 +65,16 @@ function deleteProduct(index) {
   productList.splice(index, 1);
   localStorage.setItem("productList", JSON.stringify(productList));
   displayProduct(productList);
+}
+
+
+function searchByName(term){
+  var foundedItems = [];
+for(var i =0; i < productList.length; i++){
+if(productList[i].pName.toLowerCase().includes(term.toLowerCase()) == true){
+foundedItems.push(productList[i])
+// alert("true")
+}
+}
+displayProduct(foundedItems)
 }
