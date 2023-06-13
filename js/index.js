@@ -36,7 +36,7 @@ function displayProduct(product) {
                   </button>
                 </td>
                 <td>
-                  <button class="btn p-0">
+                  <button onclick="deleteProduct(${i})" class="btn p-0">
                     <i class="fa fa-trash text-danger fs-4"></i>
                   </button>
                 </td>
@@ -52,4 +52,9 @@ function clearList() {
   productDesc.value = "";
   productCat.value = "";
   productPrice.value = "";
+}
+
+function deleteProduct(index) {
+  productList.splice(index, 1);
+  displayProduct(productList)
 }
