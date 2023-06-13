@@ -32,7 +32,7 @@ function displayProduct(product) {
     Table += `
     <tr>
                 <th scope="row">${i + 1}</th>
-                <td>${product[i].pName}</td>
+                <td>${product[i].newName ? product[i].newName : product[i].pName }</td>
                 <td>${product[i].pDesc}</td>
                 <td>${product[i].pCat}</td>
                 <td>${product[i].pPrice}</td>
@@ -72,6 +72,7 @@ function searchByName(term){
   var foundedItems = [];
 for(var i =0; i < productList.length; i++){
 if(productList[i].pName.toLowerCase().includes(term.toLowerCase()) == true){
+  productList[i].newName = productList[i].pName.toLowerCase().replace(term.toLowerCase(),`<span class="text-danger fw-bold">${term}</span>`)
 foundedItems.push(productList[i])
 // alert("true")
 }
