@@ -51,6 +51,7 @@
               class="form-control text-white bg-transparent my-2"
               placeholder="ex: iphone"
             />
+            <p class="text-danger d-none " id="nameValidate">Invalid Name ([A-Z][a-z]{3,10})</p>
             <label for="pDesc">Descreption :</label>
             <input
               type="text"
@@ -58,6 +59,8 @@
               class="form-control text-white bg-transparent my-2"
               placeholder="ex: 2023-Model"
             />
+            <p class="text-danger d-none " id="descValidate">Invalid Desc ([A-Z][a-z]{3,10})</p>
+
             <label for="pCat">Categoriey :</label>
             <input
               type="text"
@@ -65,6 +68,8 @@
               class="form-control text-white bg-transparent my-2"
               placeholder="ex: phone"
             />
+            <p class="text-danger d-none " id="catValidate">Invalid Cat (Mobile-Tv-Laptop)</p>
+
             <label for="pPrice">Price :</label>
             <input
               type="tel"
@@ -72,7 +77,9 @@
               class="form-control text-white bg-transparent my-2"
               placeholder="ex: 999$"
             />
-            <button onclick="getProducts()" class="mt-2 btn btn-success">Add Product</button>
+            <p class="text-danger d-none " id="priceValidate">Invalid Price (10-9999)</p>
+
+            <button id="addProdBtn" onclick="getProducts()" class="mt-2  btn btn-success">Add Product</button>
           </div>
         </div>
       </section>
