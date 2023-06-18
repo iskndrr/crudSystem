@@ -2,7 +2,10 @@ var productName = document.getElementById("pName");
 var productDesc = document.getElementById("pDesc");
 var productCat = document.getElementById("pCat");
 var productPrice = document.getElementById("pPrice");
+var addProdBtn = document.getElementById("addProdBtn");
+var updateProdBtn = document.getElementById("updateProdBtn");
 var productList;
+var updateIndex = 0;
 if (localStorage.getItem("productList") == null) {
   productList = [];
 } else {
@@ -29,7 +32,7 @@ function displayProduct(product) {
                 <td>${product[i].pPrice}</td>
                 
                 <td>
-                  <button class="btn p-0">
+                  <button onclick="setUpdateData(${i})" class="btn p-0">
                     <i class="fa fa-edit text-warning fs-4"></i>
                   </button>
                 </td>
@@ -43,6 +46,34 @@ function displayProduct(product) {
   }
 
   document.getElementById("tBody").innerHTML = Table;
+}
+
+function setUpdateData(index) {
+  updateIndex = index;
+  productName.value = productList[index].pName;
+  productDesc.value = productList[index].pDesc;
+  productCat.value = productList[index].pCat;
+  productPrice.value = productList[index].pPrice;
+  addProdBtn.classList.add("d-none");
+  updateProdBtn.classList.remove("d-none");
+}
+
+updateProdBtn.onclick = function () {
+  updateProd();
+};
+function updateProd() {
+  var product = {
+    pName: productName.value,
+    pDesc: productDesc.value,
+    pCat: productCat.value,
+    pPrice: productPrice.value,
+  };
+  productList.splice(updateIndex, 1, product);
+  displayProduct(productList);
+  clearList();
+  localStorage.setItem("productList", JSON.stringify(productList));
+  addProdBtn.classList.remove("d-none");
+  updateProdBtn.classList.add("d-none");
 }
 
 function clearList() {
@@ -64,9 +95,7 @@ function searchByName(term) {
     if (
       productList[i].pName.toLowerCase().includes(term.toLowerCase()) == true
     ) {
-      productList[i].newName = productList[i].pName
-        .toLowerCase()
-        .replace(
+      productList[i].newName = productList[i].pName.toLowerCase().replace(
           term.toLowerCase(),
           `<span class="text-danger fw-bold">${term}</span>`
         );
